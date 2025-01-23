@@ -1,0 +1,16 @@
+<body>
+    <div class="container">
+      
+      <h1 class="title">All Users</h1>
+  
+      
+      <div class="user-list">
+        @for (userElement of userCollection; track userElement) {
+          <div class="user-item">
+            <span class="user-name">{{ userElement.username }}</span>
+            <button class="login-btn" (click)="loginAsUser(userElement)">Login</button>
+          </div>
+        }
+      </div>
+    </div>
+  </body>
