@@ -1,0 +1,9 @@
+2025-01-04 14:06:50.906305+02:00 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS channels (\000d\000a    id INT PRIMARY KEY AUTO_INCREMENT,\000d\000a    name VARCHAR(128) ,\000d\000a    owner_id INT ,\000d\000a    is_active INT DEFAULT 1,\000d\000a\000d\000a[*])"; expected "identifier"; SQL statement:
+CREATE TABLE IF NOT EXISTS channels (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(128) ,
+    owner_id INT ,
+    is_active INT DEFAULT 1,
+
+) [42001-232]
