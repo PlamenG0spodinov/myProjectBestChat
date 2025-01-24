@@ -1,0 +1,26 @@
+<body>
+    <div class="container">
+      
+      <h1 class="title">All Users</h1>
+  
+      
+      <div class="user-list">
+        @for (userElement of userCollection; track userElement) {
+          <div class="user-item">
+            <span>{{ userElement.username }}</span>
+            <button (click)="loginAsUser(userElement)">Вход</button>
+          </div>
+        }
+      </div>
+
+    <div>
+      
+      <input [(ngModel)]="newUser.username" placeholder="Потребителско име" />
+      <input [(ngModel)]="newUser.email" placeholder="Email" />
+      <input [(ngModel)]="newUser.password" placeholder="Парола" type="password" />
+      <button (click)="createUser()">Създай</button>
+      
+    </div>
+
+    </div>
+  </body>

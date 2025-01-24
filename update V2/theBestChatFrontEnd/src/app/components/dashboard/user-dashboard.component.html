@@ -1,0 +1,49 @@
+<body>
+  <div class="dashboard-container">
+    <h1 class="dashboard-title">Channels</h1>
+
+    <div class="channel-list">
+      @for (channelElement of userChannels; track channelElement) {
+        <div class="item">
+          <span class="channel-name">{{ channelElement.name }}</span>
+        </div>
+      }
+    </div>
+
+    
+    <div class="create-channel">
+      <h2>Create Channel</h2>
+      <input
+        type="text"
+        [(ngModel)]="newChannelName"
+        placeholder="Enter channel name"
+    />
+    <button (click)="createChannel()">Create Channel</button>
+    </div>
+
+  </div>
+
+  <div class="dashboard-container">
+
+    <h1 class="dashboard-title">Friends</h1>
+    <div class="friend-list">
+      @for (friend of friends; track friend) {
+        <div class="friend-item">
+          <span>{{ friend.username  }}</span> 
+        </div>
+      }
+    </div>
+
+
+    <div class="add-friend">
+      <h3>Add a New Friend</h3>
+      <input
+        type="text"
+        [(ngModel)]="newFriendUsername"
+        placeholder="Enter Friend Username"
+      />
+      <button (click)="addFriend()">Add Friend</button>
+    </div>
+
+  </div>
+</body>
