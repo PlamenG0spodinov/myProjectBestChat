@@ -119,9 +119,7 @@ import { MessageType } from "../../models/message.model";
   private loadOtherChannels() {
     this.channelApi.getChannelsByInvitedUser(this.userId).subscribe(
       (channels) => {
-        // Обработете каналите, които се връщат от бекенда
         console.log('Други канали', channels);
-        // Може да добавите логика за записване на каналите в списък, ако е необходимо
         this.otherChannels = channels;
       },
       (error) => {
