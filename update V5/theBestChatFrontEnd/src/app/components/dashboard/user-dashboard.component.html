@@ -1,0 +1,95 @@
+<body>
+  <div class="dashboard-container">
+    <h1 class="dashboard-title">My Channels</h1>
+
+    <div class="channel-list">
+      @for (channelElement of userChannels; track channelElement) {
+        <div class="item-ch" (click)="showInviteForm(channelElement)">
+          <span class="channel-name">{{ channelElement.name }}</span>
+        </div>
+      }
+    </div>
+    @if (showInviteField) {
+      <div>
+        <h3>Invite Friend to Channel: {{ selectedChannel?.name }}</h3>
+        <select [(ngModel)]="selectedFriend">
+          @for (friend of friends; track friend) {
+            <option [ngValue]="friend">{{ friend.username }}</option>
+          }
+        </select>
+        <button (click)="inviteFriendToChannel()">Invite</button>
+      </div>
+    }
+    
+    
+    <div class="create-channel">
+      <h2>Create Channel</h2>
+      <input
+        type="text"
+        [(ngModel)]="newChannelName"
+        placeholder="Enter channel name"
+    />
+    <button (click)="createChannel()">Create Channel</button>
+    </div>
+   
+  </div>
+ 
+  <div class="dashboard-container">
+    <h1 class="dashboard-title">Outher Channels</h1>
+      @for (channel of otherChannels; track channel) {
+        <div>
+          <span class="channel-name">{{ channel.channel.name }}</span>
+      </div>
+      }
+   
+  </div>
+
+  
+
+  <div class="dashboard-container">
+
+    <h1 class="dashboard-title">Friends</h1>
+    <div class="friend-list">
+      @for (friend of friends; track friend) {
+        <div class="item-fr" (click)="openChat(friend)">
+          <span>{{ friend.username  }}</span> 
+        </div>
+      }
+    </div>
+
+    <div class="add-friend">
+      <h3>Add a New Friend</h3>
+      <input
+        type="text"
+        [(ngModel)]="newFriendUsername"
+        placeholder="Enter Friend Username"
+      />
+      <button (click)="addFriend()">Add Friend</button>
+    </div>
+
+  </div>
+
+  
+
+  @if (selectedFriend) {
+    <div class="chat-container">
+      <h2 class="chat-title">{{ selectedFriend?.username }} - Chat</h2>
+  
+      <div class="message-list">
+        @if (messages && messages.length > 0) {
+          @for (message of messages; track message) {
+            <div class="message-item">
+              <span> {{ message }} </span>
+            </div>
+          }
+        }
+      </div>
+  
+      <div class="message-input">
+        <input [(ngModel)]="messageContent" placeholder="Write a message" />
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  }
+  
+</body>
