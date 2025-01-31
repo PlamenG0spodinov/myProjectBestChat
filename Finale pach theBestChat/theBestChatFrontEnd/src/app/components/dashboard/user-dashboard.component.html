@@ -1,0 +1,126 @@
+<body>
+  <div class="dashboard-container-left">
+    <h1 class="dashboard-title">My Channels</h1>
+
+    <div class="channel-list">
+      @for (channelElement of userChannels; track channelElement) {
+        <div class="item-ch" (click)="showInviteForm(channelElement)">
+          <span class="channel-name">{{ channelElement.name }}</span>
+          
+          <button class="group" (click)="deleteChannel(channelElement)">Delete</button> 
+          <button class="group" (click)="openUpdateForm(channelElement)">Update</button>
+          <button class="group" (click)="openChannelChat(channelElement)">Chat</button>
+
+        </div>
+      }
+    
+      @if (showUpdateForm) {
+        <div class="update-channel-form">
+          <h3>Update Channel: {{ selectedChannelForUpdate?.name }}</h3>
+          <input [(ngModel)]="newChannelName" placeholder="New Channel Name" />
+          <button (click)="saveUpdatedChannel()">Save</button>
+          <button (click)="closeUpdateForm()">Cancel</button>
+        </div>
+      }
+    </div>
+
+
+    @if (showInviteField) {
+      <div>
+        <h3>Invite Friend to Channel: {{ selectedChannel?.name }}</h3>
+        <select [(ngModel)]="selectedFriend">
+          @for (friend of friends; track friend) {
+            <option [ngValue]="friend">{{ friend.username }}</option>
+          }
+        </select>
+        <button (click)="inviteFriendToChannel()">Invite</button>
+      </div>
+    }
+    
+    
+    <div class="create-channel">
+      <h2>Create Channel</h2>
+      <input
+        type="text"
+        [(ngModel)]="newChannelName"
+        placeholder="Enter channel name"
+    />
+    <button (click)="createChannel()">Create Channel</button>
+    </div>
+
+    <h1 class="dashboard-title">Outher Channels</h1>
+   <div class="outher-channel-list">
+      @for (channel of otherChannels; track channel) {
+        <div class="channel-list">
+          <span class="channel-name">{{ channel.channel.name }}</span>
+          <button class="group" (click)="openChannelChat(channel.channel)">Chat</button> 
+      </div>
+      }
+   </div>
+
+      <h1 class="dashboard-title">Friends</h1>
+    <div class="friend-list">
+      @for (friend of friends; track friend) {
+        <div class="item-fr" (click)="openChat(friend)">
+          <span>{{ friend.username  }}</span> 
+        </div>
+      }
+    </div>
+
+    <div class="add-friend">
+      <h3>Add a New Friend</h3>
+      <input
+        type="text"
+        [(ngModel)]="newFriendUsername"
+        placeholder="Enter Friend Username"
+      />
+      <button (click)="addFriend()">Add Friend</button>
+    </div>
+
+</div>
+
+  <div class="dashboard-container-right">
+
+
+  @if (selectedFriend) {
+    <div class="chat-container">
+      <h2 class="chat-title">{{ selectedFriend?.username }} - Chat</h2>
+  
+      <div class="message-list">
+        @if (messages && messages.length > 0) {
+          @for (message of messages; track message) {
+            <div class="message-item">
+              <span> {{ message }} </span>
+            </div>
+          }
+        }
+      </div>
+  
+      <div class="message-input">
+        <input [(ngModel)]="messageContent" placeholder="Write a message" />
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  }
+
+  @if (selectedChannel) {
+    <div class="chat-container">
+      <h2 class="chat-title">{{ selectedChannel?.name }} - Chat</h2>
+  
+      <div class="message-list">
+        @for (message of channelMessage; track message) {
+          <div class="message-item">
+            <span>{{ channelMessage }}</span>
+          </div>
+        }
+      </div>
+  
+      <div class="message-input">
+        <input [(ngModel)]="channelMessageContent" placeholder="Write a message" />
+        <button (click)="sendChannelMessage()">Send</button>
+      </div>
+    </div>
+  }
+
+  </div>
+</body>
